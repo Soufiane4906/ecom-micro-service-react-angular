@@ -9,7 +9,11 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 @RepositoryRestResource
-public interface ProductRepository extends JpaRepository<Product,Long> {
+public interface ProductRepository extends JpaRepository<Product, Long> {
     @RestResource(path = "/byName")
     Page<Product> findByNameContains(@Param("keyword") String keyword, Pageable pageable);
+
+    // Ajouter une méthode pour filtrer par catégorie (Computer, Printer, Smart Phone)
+    @RestResource(path = "/byCategory")
+    Page<Product> findByNameStartsWith(@Param("category") String category, Pageable pageable);
 }
